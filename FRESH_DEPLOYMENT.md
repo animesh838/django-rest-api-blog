@@ -30,7 +30,7 @@ Once Railway starts deploying, add these environment variables:
 ```bash
 SECRET_KEY=django-insecure-your-unique-secret-key-here
 DEBUG=False
-ALLOWED_HOSTS=your-new-domain.railway.app
+ALLOWED_HOSTS=animesh.railway.app
 ```
 
 **Replace `your-new-domain.railway.app` with your actual Railway domain.**
