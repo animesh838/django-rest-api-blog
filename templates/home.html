@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Django API Website{% endblock %}
+
+{% block content %}
+<div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to Django API Blog</h1>
+    <p class="text-xl text-gray-600 mb-8">A modern full-stack application built with Django REST Framework</p>
+    <div class="flex justify-center space-x-4">
+        <a href="/posts" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+            <i class="fas fa-book-open mr-2"></i>View Posts
+        </a>
+        <a href="/admin" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition">
+            <i class="fas fa-cog mr-2"></i>Admin Panel
+        </a>
+    </div>
+</div>
+
+<div class="grid md:grid-cols-3 gap-8 mb-12">
+    <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+        <div class="text-blue-600 text-3xl mb-4">
+            <i class="fas fa-code"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">REST API</h3>
+        <p class="text-gray-600">Powerful Django REST Framework API with automatic serialization and authentication.</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+        <div class="text-green-600 text-3xl mb-4">
+            <i class="fas fa-database"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Database Models</h3>
+        <p class="text-gray-600">Well-structured models for Posts and Comments with proper relationships.</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+        <div class="text-purple-600 text-3xl mb-4">
+            <i class="fas fa-palette"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Modern UI</h3>
+        <p class="text-gray-600">Beautiful responsive design with Tailwind CSS and smooth animations.</p>
+    </div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">API Endpoints</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div>
+            <h3 class="text-lg font-semibold mb-3 text-green-600">Posts</h3>
+            <ul class="space-y-2 text-sm">
+                <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/posts/</code> - List all posts</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">POST /api/posts/</code> - Create new post</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/posts/{id}/</code> - Get specific post</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">PUT /api/posts/{id}/</code> - Update post</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">DELETE /api/posts/{id}/</code> - Delete post</li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-3 text-blue-600">Comments</h3>
+            <ul class="space-y-2 text-sm">
+                <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/comments/</code> - List all comments</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">POST /api/comments/</code> - Create new comment</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/comments/{id}/</code> - Get specific comment</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">PUT /api/comments/{id}/</code> - Update comment</li>
+                <li><code class="bg-gray-100 px-2 py-1 rounded">DELETE /api/comments/{id}/</code> - Delete comment</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 
