@@ -35,12 +35,17 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=DEFAULT_ALLOWED_HOSTS, cast=lamb
 if os.environ.get('RAILWAY_STATIC_URL'):
     # We're on Railway, add common Railway domains
     railway_hosts = [
-        'web-production-aacb7.up.railway.app',  # Your specific domain
-        'web-production-aacb7.up.railway.app',  # Your specific domain
+        'web-production-aacb7.up.railway.app',  # Your previous domain
+        'web-production-c3802.up.railway.app',  # Your new domain
         'up.railway.app',     # Railway base domain
         'railway.app',        # Railway base domain
     ]
     ALLOWED_HOSTS.extend(railway_hosts)
+    
+    # Also add any Railway domain automatically
+    railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+    if railway_domain and railway_domain not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(railway_domain)
 
 
 # Application definition
