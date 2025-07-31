@@ -11,7 +11,7 @@ from .serializers import (
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]  # Allow all users to access posts
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -19,7 +19,12 @@ class PostViewSet(viewsets.ModelViewSet):
         return PostSerializer
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        # For unauthenticated users, create a default author or use None
+        if self.request.user.is_authenticated:
+            serializer.save(author=self.request.user)
+        else:
+            # Create post without author (or you can create a default user)
+            serializer.save(author=None)
 
     @action(detail=True, methods=['post'])
     def add_comment(self, request, pk=None):
@@ -40,10 +45,10 @@ class PostViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]  # Allow all users to comment
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]  # Keep user data protected
