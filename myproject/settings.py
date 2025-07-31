@@ -31,23 +31,6 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 DEFAULT_ALLOWED_HOSTS = 'localhost,127.0.0.1,0.0.0.0'
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=DEFAULT_ALLOWED_HOSTS, cast=lambda v: [s.strip() for s in v.split(',')])
 
-# Add Railway domains
-if os.environ.get('RAILWAY_STATIC_URL'):
-    # We're on Railway, add common Railway domains
-    railway_hosts = [
-        'web-production-aacb7.up.railway.app',  # Your previous domain
-        'web-production-c3802.up.railway.app',  # Your previous domain
-        'animesh.up.railway.app',              # Your new domain
-        'up.railway.app',     # Railway base domain
-        'railway.app',        # Railway base domain
-    ]
-    ALLOWED_HOSTS.extend(railway_hosts)
-    
-    # Also add any Railway domain automatically
-    railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
-    if railway_domain and railway_domain not in ALLOWED_HOSTS:
-        ALLOWED_HOSTS.append(railway_domain)
-
 
 # Application definition
 
@@ -97,37 +80,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Check if we're on Railway (production)
-if os.environ.get('RAILWAY_STATIC_URL'):
-    # Check if PostgreSQL environment variables are available
-    if os.environ.get('PGDATABASE'):
-        # Railway PostgreSQL database
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': os.environ.get('PGDATABASE'),
-                'USER': os.environ.get('PGUSER'),
-                'PASSWORD': os.environ.get('PGPASSWORD'),
-                'HOST': os.environ.get('PGHOST'),
-                'PORT': os.environ.get('PGPORT', '5432'),
-            }
-        }
-    else:
-        # Fallback to SQLite if PostgreSQL is not configured
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
-            }
-        }
-else:
-    # Local SQLite database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
 
 
 # Password validation
