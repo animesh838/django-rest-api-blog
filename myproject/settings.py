@@ -98,17 +98,27 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Check if we're on Railway (production)
 if os.environ.get('RAILWAY_STATIC_URL'):
-    # Railway PostgreSQL database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('PGDATABASE'),
-            'USER': os.environ.get('PGUSER'),
-            'PASSWORD': os.environ.get('PGPASSWORD'),
-            'HOST': os.environ.get('PGHOST'),
-            'PORT': os.environ.get('PGPORT', '5432'),
+    # Check if PostgreSQL environment variables are available
+    if os.environ.get('PGDATABASE'):
+        # Railway PostgreSQL database
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.environ.get('PGDATABASE'),
+                'USER': os.environ.get('PGUSER'),
+                'PASSWORD': os.environ.get('PGPASSWORD'),
+                'HOST': os.environ.get('PGHOST'),
+                'PORT': os.environ.get('PGPORT', '5432'),
+            }
         }
-    }
+    else:
+        # Fallback to SQLite if PostgreSQL is not configured
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # Local SQLite database
     DATABASES = {
