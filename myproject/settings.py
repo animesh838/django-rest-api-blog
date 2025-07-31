@@ -36,7 +36,8 @@ if os.environ.get('RAILWAY_STATIC_URL'):
     # We're on Railway, add common Railway domains
     railway_hosts = [
         'web-production-aacb7.up.railway.app',  # Your previous domain
-        'web-production-c3802.up.railway.app',  # Your new domain
+        'web-production-c3802.up.railway.app',  # Your previous domain
+        'animesh.up.railway.app',              # Your new domain
         'up.railway.app',     # Railway base domain
         'railway.app',        # Railway base domain
     ]
