@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn myproject.wsgi:application 
+web: chmod +x start.sh && ./start.sh 
