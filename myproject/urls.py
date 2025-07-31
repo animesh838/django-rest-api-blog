@@ -24,11 +24,12 @@ urlpatterns = [
     # Frontend routes
     path('', views.home, name='home'),
     path('posts/', views.posts, name='posts'),
-    
+    path('health/', views.health_check, name='health_check'),
+
     # API routes
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    
+
     # Admin routes
     path('admin/', admin.site.urls),
 ]

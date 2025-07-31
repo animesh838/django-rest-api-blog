@@ -1,1 +1,1 @@
-web: python migrate.py && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn myproject.wsgi:application 
+web: python manage.py setup_db && python manage.py collectstatic --noinput && gunicorn myproject.wsgi:application 
